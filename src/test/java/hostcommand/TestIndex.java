@@ -10,6 +10,7 @@ public class TestIndex {
 	@Test
 	public void testHostCommand() {
 		System.out.println("Greetings from SPORTOCO!" + System.getProperty("os.name"));
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + System.getProperty("gameId"));
 		
 		String chromedriverPath = "uiautomation_lib/chromedriver";			
 		if (System.getProperty("os.name").toLowerCase().contains("windows")) {
