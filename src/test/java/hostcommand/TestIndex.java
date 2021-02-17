@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class TestIndex {
 	
 	@Test
-	public void testHostCommand() {
+	public void testHostCommand() throws InterruptedException {
 		System.out.println("Greetings from SPORTOCO!" + System.getProperty("os.name"));
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + System.getProperty("gameId"));
 		
@@ -26,6 +26,8 @@ public class TestIndex {
 		//System.setProperty("webdriver.gecko.driver", "/usr/local/Cellar/geckodriver/0.29.0");
 		WebDriver driver = new ChromeDriver();
 		driver.get(System.getProperty("url"));		
+		Thread.sleep(10000);
+		driver.quit();
 	}
 	
 }
