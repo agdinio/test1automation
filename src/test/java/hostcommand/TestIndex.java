@@ -25,7 +25,7 @@ public class TestIndex {
 		
 		//System.setProperty("webdriver.gecko.driver", "/usr/local/Cellar/geckodriver/0.29.0");
 		WebDriver driver = new ChromeDriver();
-		driver.get("https://gmail.com");		
+		driver.get(System.getProperty("url"));		
 	}
 	
 }
