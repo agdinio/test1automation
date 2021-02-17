@@ -9,8 +9,9 @@ public class TestIndex {
 	
 	@Test
 	public void testHostCommand() throws InterruptedException {
-		System.out.println("Greetings from SPORTOCO!" + System.getProperty("os.name"));
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + System.getProperty("gameId"));
+		System.out.println("OPERATING SYSTEM: " + System.getProperty("os.name"));
+		System.out.println("H-COMMAND URL: " + System.getProperty("url"));
+		System.out.println("GAME ID: " + System.getProperty("gameId"));
 		
 		String chromedriverPath = "uiautomation_lib/chromedriver";			
 		if (System.getProperty("os.name").toLowerCase().contains("windows")) {
