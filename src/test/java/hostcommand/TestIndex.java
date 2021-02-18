@@ -47,8 +47,8 @@ public class TestIndex {
 		//System.setProperty("webdriver.gecko.driver", "/usr/local/Cellar/geckodriver/0.29.0");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-		//driver.get(System.getProperty("url"));
-		driver.get("http://127.0.0.1:1030/?info=396bb3047679849b1085138c5621f6b839bd0094cffb4e3d1ae95b15f6749f7916619fa4041ccb18d9eac614a10d381f03ea5f05d9d683cc757fdaabe89eed72c2d930563f68900cca8aaa5b0c5d62b5e45f2ecf81ad964f900ff70dd22091bcfaa51e3866eb6cd962ea51f49b52f6bdbc6ae1486f12095b134b78047e4f8bb11d63e3ad4ce420703bfabbdb07234603");
+		driver.get(System.getProperty("url"));
+		//driver.get("http://127.0.0.1:1030/?info=396bb3047679849b1085138c5621f6b839bd0094cffb4e3d1ae95b15f6749f7916619fa4041ccb18d9eac614a10d381f03ea5f05d9d683cc757fdaabe89eed72c2d930563f68900cca8aaa5b0c5d62b5e45f2ecf81ad964f900ff70dd22091bcfaa51e3866eb6cd962ea51f49b52f6bdbc6ae1486f12095b134b78047e4f8bb11d63e3ad4ce420703bfabbdb07234603");
 		
 		Thread.sleep(2000);
 		

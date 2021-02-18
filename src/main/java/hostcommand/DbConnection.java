@@ -39,7 +39,8 @@ public class DbConnection {
 		ArrayList<RecordedPlay> arr = new ArrayList<RecordedPlay>();
 		try {
 			CallableStatement stmt = conn.prepareCall("{call sp_automation_read_recorded_plays(?)}", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			stmt.setString(1, "fbncaa-lb01-35eb43-bvk-01122021");
+			//stmt.setString(1, "fbncaa-lb01-35eb43-bvk-01122021");
+			stmt.setString(1, System.getProperty("gameId"));
 			ResultSet rs = stmt.executeQuery();
 			
 			int cnt = 0;
