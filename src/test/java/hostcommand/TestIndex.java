@@ -48,7 +48,7 @@ public class TestIndex {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get(System.getProperty("url"));
-		//driver.get("http://127.0.0.1:1030/?info=396bb3047679849b1085138c5621f6b839bd0094cffb4e3d1ae95b15f6749f7916619fa4041ccb18d9eac614a10d381f03ea5f05d9d683cc757fdaabe89eed72c2d930563f68900cca8aaa5b0c5d62b5e45f2ecf81ad964f900ff70dd22091bcfaa51e3866eb6cd962ea51f49b52f6bdbc6ae1486f12095b134b78047e4f8bb11d63e3ad4ce420703bfabbdb07234603");
+		//driver.get("http://127.0.0.1:1030/?info=396bb3047679849b1085138c5621f6b8476367d7e33142a885bce1860e2c457a2451ae09077af6cd31b61d4bd116710126c4a3853a5f2a2b0481155ed632feeda3acc29973bc1d0941b73c462c2123a0bb805d13d928f575fb00d655904af606cf15d43feee3fcca21df4c58688aeb73dd8eb81e0242c7f2ee5ef6f8736c2f4bc1f89308563c50cebafa1a57dc20faba");
 		
 		Thread.sleep(2000);
 		
@@ -95,26 +95,35 @@ public class TestIndex {
 						
 						try {
 							Thread.sleep(new Long((long) (play.getWait() * 1000)));
-							if (play.getRefId().equalsIgnoreCase("editor-1-Announce")) {
-								WebElement announceEl = driver.findElement(By.id("editor-1-Announce"));
-								WebDriverWait wait = new WebDriverWait((WebDriver) announceEl, Duration.ofSeconds(5)); 
+							if (play.getRefId().equalsIgnoreCase("editor-1-Announce") 
+									|| play.getRefId().equalsIgnoreCase("editor-2-Announce") 
+									|| play.getRefId().equalsIgnoreCase("editor-3-Announce")) {
+								
+								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); 
 								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ql-blank")));
 								el.sendKeys(play.getEventSelectValue());
-							} else if (play.getRefId().equalsIgnoreCase("editor-2-Announce")) {
-								WebElement announceEl = driver.findElement(By.id("editor-2-Announce"));
-								WebDriverWait wait = new WebDriverWait((WebDriver) announceEl, Duration.ofSeconds(5)); 
-								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ql-blank")));
-								el.sendKeys(play.getEventSelectValue());								
-							} else if (play.getRefId().equalsIgnoreCase("editor-3-Announce")) {
-								WebElement announceEl = driver.findElement(By.id("editor-3-Announce"));
-								WebDriverWait wait = new WebDriverWait((WebDriver) announceEl, Duration.ofSeconds(5)); 
-								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ql-blank")));
-								el.sendKeys(play.getEventSelectValue());								
 							} else {
 								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(play.getRefId())));
-								el.sendKeys(play.getEventSelectValue());
+								el.sendKeys(play.getEventSelectValue());								
 							}
+//							if (play.getRefId().equalsIgnoreCase("editor-1-Announce")) {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); 
+//								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ql-blank")));
+//								el.sendKeys(play.getEventSelectValue());
+//							} else if (play.getRefId().equalsIgnoreCase("editor-2-Announce")) {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); 
+//								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ql-blank")));
+//								el.sendKeys(play.getEventSelectValue());								
+//							} else if (play.getRefId().equalsIgnoreCase("editor-3-Announce")) {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); 
+//								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ql-blank")));
+//								el.sendKeys(play.getEventSelectValue());								
+//							} else {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(play.getRefId())));
+//								el.sendKeys(play.getEventSelectValue());
+//							}
 													
 						} catch(TimeoutException e) {
 							System.out.println("Failed to load input event " + play.getRefId());
