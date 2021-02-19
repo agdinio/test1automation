@@ -95,27 +95,39 @@ public class TestIndex {
 						
 						try {
 							Thread.sleep(new Long((long) (play.getWait() * 1000)));
-							if (play.getRefId().equalsIgnoreCase("editor-1-Announce")) {
+//							if (play.getRefId().equalsIgnoreCase("editor-1-Announce")) {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//								WebElement announceEl = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("editor-1-Announce")));							
+//								WebElement el = announceEl.findElement(By.className("ql-blank"));
+//								el.sendKeys(play.getEventSelectValue());
+//								
+//							} else if (play.getRefId().equalsIgnoreCase("editor-2-Announce")) {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//								WebElement announceEl = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("editor-2-Announce")));							
+//								WebElement el = announceEl.findElement(By.className("ql-blank"));
+//								el.sendKeys(play.getEventSelectValue());
+//							} else if (play.getRefId().equalsIgnoreCase("editor-3-Announce")) {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//								WebElement announceEl = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("editor-3-Announce")));							
+//								WebElement el = announceEl.findElement(By.className("ql-blank"));
+//								el.sendKeys(play.getEventSelectValue());
+//							} else {
+//								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(play.getRefId())));
+//								el.sendKeys(play.getEventSelectValue());
+//							}
+							
+							if (play.getRefId().contains("editor-1-Announce") || play.getRefId().contains("editor-2-Announce") || play.getRefId().contains("editor-3-Announce")) {
 								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-								WebElement announceEl = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("editor-1-Announce")));							
+								WebElement announceEl = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(play.getRefId())));							
 								WebElement el = announceEl.findElement(By.className("ql-blank"));
-								el.sendKeys(play.getEventSelectValue());
-								
-							} else if (play.getRefId().equalsIgnoreCase("editor-2-Announce")) {
-								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-								WebElement announceEl = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("editor-2-Announce")));							
-								WebElement el = announceEl.findElement(By.className("ql-blank"));
-								el.sendKeys(play.getEventSelectValue());
-							} else if (play.getRefId().equalsIgnoreCase("editor-3-Announce")) {
-								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-								WebElement announceEl = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("editor-3-Announce")));							
-								WebElement el = announceEl.findElement(By.className("ql-blank"));
-								el.sendKeys(play.getEventSelectValue());
+								el.sendKeys(play.getEventSelectValue());								
 							} else {
 								WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 								WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(play.getRefId())));
-								el.sendKeys(play.getEventSelectValue());
-							}													
+								el.sendKeys(play.getEventSelectValue());								
+							}
+							
 						} catch(TimeoutException e) {
 							System.out.println("Failed to load input event " + play.getRefId());
 							

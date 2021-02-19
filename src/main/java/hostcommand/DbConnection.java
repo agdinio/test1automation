@@ -40,7 +40,7 @@ public class DbConnection {
 		try {
 			CallableStatement stmt = conn.prepareCall("{call sp_automation_read_recorded_plays(?)}", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			stmt.setString(1, System.getProperty("gameId"));
-			//stmt.setString(1, "fbncaa-lb01-71d070-gvd-01072021");
+			////stmt.setString(1, "fbncaa-lb01-71d070-gvd-01072021");
 			ResultSet rs = stmt.executeQuery();
 			
 			int cnt = 0;
@@ -72,7 +72,7 @@ public class DbConnection {
 				
 				++cnt;
 			}
-			
+										
 			TextTable tt = new TextTable(cols, data);
 			tt.setAddRowNumbering(true);
 			tt.printTable();
