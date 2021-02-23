@@ -17,11 +17,12 @@ import dnl.utils.text.table.TextTable;
 public class DbConnection {
 	
 	public ArrayList<RecordedPlay> getPlays() {
-		URL url;
+		URL hcommUrl;
 		try {
-			StringBuilder sb = new StringBuilder("http://sportocotoday.com:6604/automation/recorded_plays?game_id=");
-			sb.append(System.getProperty("url").toString());
-			url = new URL(sb.toString());
+			//String str = "http://sportocotoday.com:6604/automation/recorded_plays?game_id=";
+			//str = str.concat(System.getProperty("url"));
+			hcommUrl = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=" + System.getProperty("url"));
+			
 			
 			//aim high
 			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-47a0ca-avh-01062021");
@@ -29,7 +30,7 @@ public class DbConnection {
 			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-35eb43-bvk-01122021");
 			
 			HttpURLConnection conn;
-			conn = (HttpURLConnection) url.openConnection();
+			conn = (HttpURLConnection) hcommUrl.openConnection();
 			conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Accept", "application/json");
 	        
