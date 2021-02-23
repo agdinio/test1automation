@@ -43,12 +43,12 @@ public class TestIndex {
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 			
-			driver.get(System.getProperty("url"));
+			//driver.get(System.getProperty("url"));
 			
 			//aim high
 			//driver.get("http://127.0.0.1:1030/?info=396bb3047679849b1085138c5621f6b81ea09ade4c95a9e6ad537c281df5382ebfad72ec9ad0bf3419ceea0d139fbd470929bd2a7b4512ac937da0414ee2ca0c8bb2d64cdb19b983d5a2c6e3e30dd4556656ef8590705bceac8cb2425b41bd1508236d1f1000737cc236016db374a70f92c493dd53288a30bb4cf3a0fab9f66b61a2fa8399120cbfe283697e9562c853");
 			//koala bear
-			//driver.get("http://127.0.0.1:1030/?info=396bb3047679849b1085138c5621f6b839bd0094cffb4e3d1ae95b15f6749f7916619fa4041ccb18d9eac614a10d381f03ea5f05d9d683cc757fdaabe89eed72c2d930563f68900cca8aaa5b0c5d62b5e45f2ecf81ad964f900ff70dd22091bcfaa51e3866eb6cd962ea51f49b52f6bdbc6ae1486f12095b134b78047e4f8bb11d63e3ad4ce420703bfabbdb07234603");
+			driver.get("http://127.0.0.1:1030/?info=396bb3047679849b1085138c5621f6b839bd0094cffb4e3d1ae95b15f6749f7916619fa4041ccb18d9eac614a10d381f03ea5f05d9d683cc757fdaabe89eed72c2d930563f68900cca8aaa5b0c5d62b5e45f2ecf81ad964f900ff70dd22091bcfaa51e3866eb6cd962ea51f49b52f6bdbc6ae1486f12095b134b78047e4f8bb11d63e3ad4ce420703bfabbdb07234603");
 			
 			Thread.sleep(2000);
 			
