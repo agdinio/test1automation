@@ -54,7 +54,7 @@ public class TestIndex {
 			
 			this.iteratePlay(0);
 
-			Thread.sleep(10000000);
+			Thread.sleep(10000);
 			driver.quit();
 		}		
 		
