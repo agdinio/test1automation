@@ -1,86 +1,91 @@
 package hostcommand;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import dnl.utils.text.table.TextTable;
-import hostcommand.RecordedPlay;
 
 public class DbConnection {
-	private static String url = "jdbc:mysql://192.249.114.226/sportoco_ds2";
-	private static String username = "sportoco_dev";
-	private static String password = "L[R,B[x(g4PC";
-	private Connection conn;
-	
-	
-	public void open() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url, username, password);
-			if (conn != null) {
-				System.out.println("Connected to the database!");			
-			} else {
-				System.out.println("Database connection failed!");								
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-			
-		}
-		
-	}
 	
 	public ArrayList<RecordedPlay> getPlays() {
-		ArrayList<RecordedPlay> arr = new ArrayList<RecordedPlay>();
+		URL url;
 		try {
-			CallableStatement stmt = conn.prepareCall("{call sp_automation_read_recorded_plays(?)}", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			stmt.setString(1, System.getProperty("gameId"));
-			////stmt.setString(1, "fbncaa-lb01-71d070-gvd-01072021");
-			ResultSet rs = stmt.executeQuery();
+			url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=" + System.getProperty("url"));
 			
-			int cnt = 0;
-			int rowCount = 0;
+			//aim high
+			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-47a0ca-avh-01062021");
+			//koala bear
+			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-35eb43-bvk-01122021");
+			
+			HttpURLConnection conn;
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Accept", "application/json");
+	        
+	        if (conn.getResponseCode() != 200) {
+	            throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+	        }
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
-			if (rs.last()) {
-				rowCount = rs.getRow();
-				rs.beforeFirst();
-			}
-			
+            String output;
+            StringBuffer content = new StringBuffer();
+            while ((output = br.readLine()) != null) {
+            	content.append(output);
+            }
+            conn.disconnect();
+
+            
+    		ArrayList<RecordedPlay> recordedPlays = new ArrayList<RecordedPlay>();
+            JSONArray jsonArray = new JSONArray(content.toString());
+			int rowCount = jsonArray.length();
 			String[] cols = {"EVENT", "REF ID", "WAIT", "VALUE", "IS PREV ENDED"};
 			Object[][] data = new Object[rowCount][5];
 
-			while (rs.next()) {
+			for (int i=0; i<jsonArray.length(); i++) {
+	        	JSONObject rs = jsonArray.getJSONObject(i);
+	        	System.out.println(rs.getString("ref_id"));
+	        	
+				data[i][0] = rs.getString("event");
+				data[i][1] = rs.getString("ref_id");
+				data[i][2] = rs.getFloat("wait");
+				data[i][3] = rs.isNull("event_select_value") ? "" : rs.getString("event_select_value");
+				data[i][4] = rs.isNull("is_previous_play_ended") ? false : rs.getInt("is_previous_play_ended") == 1 ? true : false;	       
 				
-				data[cnt][0] = rs.getString("event");
-				data[cnt][1] = rs.getString("ref_id");
-				data[cnt][2] = rs.getFloat("wait");
-				data[cnt][3] = rs.getString("event_select_value");
-				data[cnt][4] = rs.getBoolean("is_previous_play_ended");
-				
-				arr.add(new RecordedPlay(
-							rs.getString("event"),
-							rs.getString("ref_id"),
-							rs.getFloat("wait"),
-							rs.getString("event_select_value"),
-							rs.getBoolean("is_previous_play_ended")
-						));
-				
-				++cnt;
+				recordedPlays.add(new RecordedPlay(
+								rs.getString("event"),
+								rs.getString("ref_id"),
+								rs.getFloat("wait"),
+								rs.isNull("event_select_value") ? "" : rs.getString("event_select_value"),
+								rs.isNull("is_previous_play_ended") ? false : rs.getInt("is_previous_play_ended") == 1 ? true : false
+							));
+
 			}
-										
+                       
 			TextTable tt = new TextTable(cols, data);
 			tt.setAddRowNumbering(true);
 			tt.printTable();
-			return arr;
-		} catch (SQLException e) {
+			
+			return recordedPlays;
+            
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return arr;
+
+		return null;
 	}
-	
+		
 }
