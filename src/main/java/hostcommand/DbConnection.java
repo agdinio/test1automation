@@ -17,20 +17,17 @@ import dnl.utils.text.table.TextTable;
 public class DbConnection {
 	
 	public ArrayList<RecordedPlay> getPlays() {
-		URL hcommUrl;
+		URL baseUrl;
 		try {
-			//String str = "http://sportocotoday.com:6604/automation/recorded_plays?game_id=";
-			//str = str.concat(System.getProperty("url"));
-			hcommUrl = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=" + System.getProperty("url"));
-			
-			
+			baseUrl = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=" + System.getProperty("gameId"));
+						
 			//aim high
 			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-47a0ca-avh-01062021");
 			//koala bear
 			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-35eb43-bvk-01122021");
 			
 			HttpURLConnection conn;
-			conn = (HttpURLConnection) hcommUrl.openConnection();
+			conn = (HttpURLConnection) baseUrl.openConnection();
 			conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Accept", "application/json");
 	        
