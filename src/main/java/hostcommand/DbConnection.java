@@ -19,12 +19,12 @@ public class DbConnection {
 	public ArrayList<RecordedPlay> getPlays() {
 		URL url;
 		try {
-			url = new URL("http://192.249.114.226:6604/automation/recorded_plays?game_id=" + System.getProperty("url"));
+			//url = new URL("http://192.249.114.226:6604/automation/recorded_plays?game_id=" + System.getProperty("url"));
 			
 			//aim high
 			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-47a0ca-avh-01062021");
 			//koala bear
-			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-35eb43-bvk-01122021");
+			url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-35eb43-bvk-01122021");
 			
 			HttpURLConnection conn;
 			conn = (HttpURLConnection) url.openConnection();
