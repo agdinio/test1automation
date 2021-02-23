@@ -19,12 +19,14 @@ public class DbConnection {
 	public ArrayList<RecordedPlay> getPlays() {
 		URL url;
 		try {
-			//url = new URL("http://192.249.114.226:6604/automation/recorded_plays?game_id=" + System.getProperty("url"));
+			StringBuilder sb = new StringBuilder("http://sportocotoday.com:6604/automation/recorded_plays?game_id=");
+			sb.append(System.getProperty("url").toString());
+			url = new URL(sb.toString());
 			
 			//aim high
 			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-47a0ca-avh-01062021");
 			//koala bear
-			url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-35eb43-bvk-01122021");
+			//url = new URL("http://sportocotoday.com:6604/automation/recorded_plays?game_id=fbncaa-lb01-35eb43-bvk-01122021");
 			
 			HttpURLConnection conn;
 			conn = (HttpURLConnection) url.openConnection();
@@ -53,7 +55,6 @@ public class DbConnection {
 
 			for (int i=0; i<jsonArray.length(); i++) {
 	        	JSONObject rs = jsonArray.getJSONObject(i);
-	        	System.out.println(rs.getString("ref_id"));
 	        	
 				data[i][0] = rs.getString("event");
 				data[i][1] = rs.getString("ref_id");
